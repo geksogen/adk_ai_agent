@@ -29,4 +29,5 @@ ollama run qwen2.5:7b
 ```Bash
 cd ../../
 adk web
+# <IP:8000> Final service
 ```
