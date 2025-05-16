@@ -143,7 +143,7 @@ except Exception as e:
     # Handle error appropriately
 
 # --- Agent Definition ---
-root_agent = Agent(
+openapi_agent = Agent(
     name="OpenAPI_agent",
     model=LiteLlm(model="ollama/qwen2.5:7b", api_base="http://176.99.131.76:11434"),
     description="Manages a Pet Store using tools generated from an OpenAPI spec.",
