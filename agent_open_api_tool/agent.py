@@ -11,6 +11,12 @@ from google.genai import types
 # --- OpenAPI Tool Imports ---
 from google.adk.tools.openapi_tool.openapi_spec_parser.openapi_toolset import OpenAPIToolset
 
+APP_NAME_OPENAPI = "openapi_petstore_app"
+USER_ID_OPENAPI = "user_openapi_1"
+SESSION_ID_OPENAPI = f"session_openapi_{uuid.uuid4()}" # Unique session ID
+AGENT_NAME_OPENAPI = "petstore_manager_agent"
+GEMINI_MODEL = "gemini-2.0-flash"
+
 # --- Sample OpenAPI Specification (JSON String) ---
 # A basic Pet Store API example using httpbin.org as a mock server
 openapi_spec_string = """
@@ -138,13 +144,15 @@ except Exception as e:
 
 # --- Agent Definition ---
 root_agent = Agent(
-    name="weather_time_agent",
+    name="OpenAPI_agent",
     model=LiteLlm(model="ollama/qwen2.5:7b", api_base="http://176.99.131.76:11434"),
-    description=(
-        "Agent to answer questions about the time and weather in a city."
-    ),
-    instruction=(
-        "You are a helpful agent who can answer user questions about the time and weather in a city."
-    ),
-    tools=[],
+    description="Manages a Pet Store using tools generated from an OpenAPI spec.",
+    instruction=f"""You are a Pet Store assistant managing pets via an API.
+    Use the available tools to fulfill user requests.
+    Available tools: {', '.join([t.name for t in generated_tools_list])}.
+    When creating a pet, confirm the details echoed back by the API.
+    When listing pets, mention any filters used (like limit or status).
+    When showing a pet by ID, state the ID you requested.
+    """,
+    tools=generated_tools_list,
 )
