@@ -11,5 +11,5 @@ root_agent = Agent(
     instruction=(
         "You are a helpful agent who can answer user questions about the time and weather in a city."
     ),
-    tools=[get_weather, get_current_time],
+    tools=[],
 )
