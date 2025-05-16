@@ -27,6 +27,7 @@ ollama run qwen2.5:7b
 
 ### Agent UP
 ```Bash
+echo "from . import agent" > ../agent_open_api_tool/__init__.py
 cd ../../
 adk web
 # <IP:8000> Final service
