@@ -3,6 +3,10 @@ sudo curl -L "https://github.com/docker/compose/releases/download/v2.23.0/docker
 sudo chmod +x /usr/local/bin/docker-compose
 pip install google-adk
 pip install litellm
+pip install asyncio
+pip install uuid
+
+
 echo "from . import agent" > ../agent_open_api_tool/__init__.py
 docker-compose up -d
 if [ $? -eq 0 ]; then
