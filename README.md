@@ -20,7 +20,6 @@ ADK simplifies interacting with external REST APIs by automatically generating c
 ```Bash
 git clone https://github.com/geksogen/adk_ai_agent.git
 cd adk_ai_agent/infrastructure/
-echo "from . import agent" > ../agent_open_api_tool/__init__.py
 sh configure_VM.sh
 ollama run qwen2.5:7b
 # <IP:11434> Final service
