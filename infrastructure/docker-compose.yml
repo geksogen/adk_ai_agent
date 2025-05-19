@@ -19,6 +19,19 @@ services:
       - NVIDIA_DRIVER_CAPABILITIES=compute,utility
     networks:
       - ollama-docker
+
+  Open_API_Beckend:
+    build: .
+    ports:
+      - "8082:8082"
+    volumes:
+      - ../Open_API_Backend:/app
+    environment:
+      - PYTHONUNBUFFERED=1
+  networks:
+    - ollama-docker
+
+
 networks:
   ollama-docker:
     external: false
