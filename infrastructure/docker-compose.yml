@@ -23,14 +23,13 @@ services:
   open_api_backend:
     build: ../infrastructure/Open_API_Backend
     ports:
-      - "8082:8082"
+      - 8082:8082
     volumes:
       - ../Open_API_Backend:/app
     environment:
       - PYTHONUNBUFFERED=1
     networks:
       - ollama-docker
-
 
 networks:
   ollama-docker:
