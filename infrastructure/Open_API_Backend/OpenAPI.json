@@ -4,6 +4,12 @@
     "title": "FastAPI",
     "version": "0.1.0"
   },
+  "servers": [
+    {
+      "url": "http://81.94.158.220:8082/",
+      "description": "Mock server OpenAPI"
+    }
+  ],
   "paths": {
     "/users/": {
       "post": {

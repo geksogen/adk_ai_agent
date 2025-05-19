@@ -21,6 +21,9 @@ ADK simplifies interacting with external REST APIs by automatically generating c
 git clone https://github.com/geksogen/adk_ai_agent.git
 cd adk_ai_agent/infrastructure/
 sh configure_VM.sh
+cd Open_API_Backend
+docker build -t api_back:1 .
+docker run --rm -d --name api_back --network=host api_back:1
 ```
 
 ### Agent UP
