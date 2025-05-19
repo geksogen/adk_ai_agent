@@ -28,7 +28,7 @@ docker run --rm -d --name api_back --network=host api_back:1
 
 ### Agent UP
 ```Bash
-cd ../
+cd ../../
 adk web
 # <IP:8000> Final service
 ```

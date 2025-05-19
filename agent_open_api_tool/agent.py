@@ -1,21 +1,10 @@
 from google.adk.agents import Agent
 from google.adk.models.lite_llm import LiteLlm
 
-import asyncio
-import uuid # For unique session IDs
-from google.adk.agents import LlmAgent
-from google.adk.runners import Runner
-from google.adk.sessions import InMemorySessionService
-from google.genai import types
 
 # --- OpenAPI Tool Imports ---
 from google.adk.tools.openapi_tool.openapi_spec_parser.openapi_toolset import OpenAPIToolset
 
-APP_NAME_OPENAPI = "openapi_petstore_app"
-USER_ID_OPENAPI = "user_openapi_1"
-SESSION_ID_OPENAPI = f"session_openapi_{uuid.uuid4()}" # Unique session ID
-AGENT_NAME_OPENAPI = "petstore_manager_agent"
-GEMINI_MODEL = "gemini-2.0-flash"
 
 # --- Sample OpenAPI Specification (JSON String) ---
 # A basic Pet Store API example using httpbin.org as a mock server
@@ -242,7 +231,7 @@ except Exception as e:
     # Handle error appropriately
 
 # --- Agent Definition ---
-openapi_agent = Agent(
+root_agent = Agent(
     name="OpenAPI_agent",
     model=LiteLlm(model="ollama/qwen2.5:7b", api_base="http://81.94.158.220:11434"),
     description="Manages a Pet Store using tools generated from an OpenAPI spec.",
