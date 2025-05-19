@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   web:
-    build: ./
+    build: /home/ubuntu/adk_ai_agent/infrastructure/Open_API_Backend
     ports:
       - "8082:8082"
     volumes:
