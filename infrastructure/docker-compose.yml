@@ -20,7 +20,7 @@ services:
     networks:
       - ollama-docker
 
-  Open_API_Beckend:
+  open_api_backend:
     build: .
     ports:
       - "8082:8082"
