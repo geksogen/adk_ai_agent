@@ -225,3 +225,5 @@ if __name__ == "__main__":
         else:
             raise e
     print("OpenAPI example finished.")
+
+https://teams.microsoft.com/v2/https://teams.microsoft.com/v2/
