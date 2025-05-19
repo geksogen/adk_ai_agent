@@ -208,27 +208,8 @@ openapi_spec_string = """
 """
 
 # --- Create OpenAPIToolset ---
-generated_tools_list = []
-try:
-    # Instantiate the toolset with the spec string
-    petstore_toolset = OpenAPIToolset(
-        spec_str=openapi_spec_string,
-        spec_str_type="json"
-        # No authentication needed for httpbin.org
-    )
-    # Get all tools generated from the spec
-    generated_tools_list = petstore_toolset.get_tools()
-    print(f"Generated {len(generated_tools_list)} tools from OpenAPI spec:")
-    for tool in generated_tools_list:
-        # Tool names are snake_case versions of operationId
-        print(f"- Tool Name: '{tool.name}', Description: {tool.description[:60]}...")
-
-except ValueError as ve:
-    print(f"Validation Error creating OpenAPIToolset: {ve}")
-    # Handle error appropriately, maybe exit or skip agent creation
-except Exception as e:
-    print(f"Unexpected Error creating OpenAPIToolset: {e}")
-    # Handle error appropriately
+toolset = OpenAPIToolset(spec_str=openapi_spec_string, spec_str_type="json")
+api_tools = toolset.get_tools()
 
 # --- Agent Definition ---
 root_agent = Agent(
@@ -239,6 +220,6 @@ root_agent = Agent(
     Use the available tools to fulfill user requests.
     Available tools
     """,
-    tools=generated_tools_list,
+    tools=api_tools,
 )
 
