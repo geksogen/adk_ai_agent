@@ -28,8 +28,6 @@ services:
       - ../Open_API_Backend:/app
     environment:
       - PYTHONUNBUFFERED=1
-    networks:
-      - ollama-docker
 
 networks:
   ollama-docker:
