@@ -208,7 +208,27 @@ openapi_spec_string = """
 """
 
 # --- Create OpenAPIToolset ---
-toolset = OpenAPIToolset(spec_str=openapi_spec_string, spec_str_type="json")
+generated_tools_list = []
+try:
+    # Instantiate the toolset with the spec string
+    petstore_toolset = OpenAPIToolset(
+        spec_str=openapi_spec_string,
+        spec_str_type="json"
+        # No authentication needed for httpbin.org
+    )
+    # Get all tools generated from the spec
+    generated_tools_list = petstore_toolset.get_tools()
+    print(f"Generated {len(generated_tools_list)} tools from OpenAPI spec:")
+    for tool in generated_tools_list:
+        # Tool names are snake_case versions of operationId
+        print(f"- Tool Name: '{tool.name}', Description: {tool.description[:60]}...")
+
+except ValueError as ve:
+    print(f"Validation Error creating OpenAPIToolset: {ve}")
+    # Handle error appropriately, maybe exit or skip agent creation
+except Exception as e:
+    print(f"Unexpected Error creating OpenAPIToolset: {e}")
+    # Handle error appropriately
 
 # --- Agent Definition ---
 root_agent = Agent(
@@ -216,7 +236,9 @@ root_agent = Agent(
     model=LiteLlm(model="ollama/qwen2.5:7b", api_base="http://81.94.158.220:11434"),
     description="Manages a Mock server OpenAPI using tools generated from an OpenAPI spec.",
     instruction=f"""You are a Mock server OpenAPI assistant managing pets via an API.
+    Use the available tools to fulfill user requests.
+    Available tools
     """,
-    tools=toolset,
+    tools=generated_tools_list,
 )
 
