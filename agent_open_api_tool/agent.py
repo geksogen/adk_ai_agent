@@ -215,10 +215,11 @@ api_tools = toolset.get_tools()
 root_agent = Agent(
     name="OpenAPI_agent",
     model=LiteLlm(model="ollama/qwen2.5:7b", api_base="http://81.94.158.220:11434"),
-    description="Manages a Mock server OpenAPI using tools generated from an OpenAPI spec.",
-    instruction=f"""You are a Mock server OpenAPI assistant managing pets via an API.
-    Use the available tools to fulfill user requests.
-    Available tools
+    description="""You are a Mock server OpenAPI API agent that interacts with Mock server OpenAPI's REST API.
+When working with the Mock server OpenAPI API:
+- Use parameters provided by the user
+- Ask for clarification if required parameters are missing
+- Format responses clearly for the user
     """,
     tools=api_tools,
 )
