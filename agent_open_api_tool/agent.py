@@ -17,7 +17,7 @@ openapi_spec_string = """
   },
   "servers": [
     {
-      "url": "http://81.94.158.220:8082/",
+      "url": "http://81.94.155.76:8082/",
       "description": "Mock server OpenAPI"
     }
   ],
@@ -214,13 +214,23 @@ api_tools = toolset.get_tools()
 # --- Agent Definition ---
 root_agent = Agent(
     name="OpenAPI_agent",
-    model=LiteLlm(model="ollama/qwen2.5:7b", api_base="http://81.94.158.220:11434"),
-    description="""You are a Mock server OpenAPI API agent that interacts with Mock server OpenAPI's REST API.
-When working with the Mock server OpenAPI API:
-- Use parameters provided by the user
-- Ask for clarification if required parameters are missing
-- Format responses clearly for the user
-    """,
+    model=LiteLlm(model="ollama/qwen2.5:7b", api_base="http://81.94.155.76:11434"),
+    instruction="""
+            You are a Mock server OpenAPI agent that interacts with Mock server OpenAPI REST API.
+            
+            When working with the Mock server OpenAPI:
+            - Use parameters provided by the user
+            - Ask for clarification if required parameters are missing
+            - Format responses clearly for the user
+            - Handle errors gracefully and explain issues in simple terms
+            
+            For content creation operations:
+            - Use names and identifiers exactly as specified by the user
+            - Add helpful descriptions when allowed by the API
+            - Apply sensible defaults for optional parameters when not specified
+            
+            Always inform the user about the actions you're taking and the results received.
+            """
     tools=api_tools,
 )
 
